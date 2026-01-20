@@ -47,5 +47,6 @@ group :development, :test do
 
   gem 'devise'
 
+  gem 'jwt'
   
 end
