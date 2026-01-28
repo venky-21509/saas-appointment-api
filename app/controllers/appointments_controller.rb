@@ -21,7 +21,10 @@ class AppointmentsController < ApplicationController
 
   def create
     appointment = current_user.appointments.create!(appointment_params)
-    render json: appointment, status: :created
+    render json: {
+      message: "Appointment Created Successfully", 
+      appointment: appointment
+     }, status: :created
   end
 
   private 
