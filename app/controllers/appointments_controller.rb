@@ -1,7 +1,22 @@
 class AppointmentsController < ApplicationController
 
   def index
-    render json: current_user.appointments 
+
+    page = params.fetch(:page, 1).to_i
+    per_page = 5
+
+    scope = current_user.admin? ? Appointment.all : current_users.appointments
+
+     appointments = scope
+                   .order(created_at: :desc)
+                   .offset((page - 1) * per_page)
+                   .limit(per_page)
+
+  render json: {
+    page: page,
+    per_page: per_page,
+    data: appointments
+  }
   end
 
   def create

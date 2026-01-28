@@ -7,4 +7,8 @@ class User < ApplicationRecord
 
   has_many :appointments, dependent: :destroy
 
+  def admin?
+    role == "admin"
+  end
+
 end
